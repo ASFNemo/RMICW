@@ -1,7 +1,6 @@
-package Com.coursework.SetCourseworkGUI.client;
+package Com.coursework.SetCourseworkApplication.Server;
 
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
 import java.awt.*;
 
 /**
@@ -12,11 +11,11 @@ public class ServerWindow extends JFrame{
     JLabel title;
 
 
+
     public ServerWindow(){
         super();
 
-        this.setSize(new Dimension(500, 500));
-        this.setResizable(false);
+        this.setSize(new Dimension(600, 500));
 
         title = new JLabel("Set your coursework!!");
 
@@ -26,7 +25,8 @@ public class ServerWindow extends JFrame{
         this.add(title);
         this.add(NT);
 
-        title.setBounds(50, 50, 50, 50);
+        title.setBounds(150, 20, 150, 50);
+        NT.setBounds(0, 100, 600, 400);
 
     }
 
