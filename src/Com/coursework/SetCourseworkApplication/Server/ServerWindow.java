@@ -12,14 +12,14 @@ public class ServerWindow extends JFrame{
 
 
 
-    public ServerWindow(){
+    public ServerWindow(String url){
         super();
 
         this.setSize(new Dimension(600, 500));
 
         title = new JLabel("Set your coursework!!");
 
-        NewTask NT = new NewTask();
+        NewTask NT = new NewTask(url);
 
 
         this.add(title);

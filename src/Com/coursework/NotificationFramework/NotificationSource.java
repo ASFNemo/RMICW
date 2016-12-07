@@ -15,7 +15,7 @@ public class NotificationSource extends UnicastRemoteObject {
 
     private static final long serialVersionUID = 4511L;
 
-    protected NotificationSource(String sourceURL) throws RemoteException, MalformedURLException {
+    public NotificationSource(String sourceURL) throws RemoteException, MalformedURLException {
         super();
 
         Naming.rebind(sourceURL, this);

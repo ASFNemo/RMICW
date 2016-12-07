@@ -1,11 +1,14 @@
 package Com.coursework.SetCourseworkApplication.Server;
 
+import Com.coursework.NotificationFramework.NotificationSource;
 import Com.coursework.SetCourseworkApplication.Coursework;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -28,9 +31,21 @@ public class NewTask extends JPanel {
 
     JButton sendAssignment;
 
+    NotificationSource notificationSource;
 
-    public NewTask(){
+
+    public NewTask(String url){
         super();
+
+        try {
+            notificationSource = new NotificationSource(url);
+        } catch (Exception e) {
+            System.out.println("EXCEPTION: " + e.toString());
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "There has been an issue running the RMI registry. make sure it is running on this host");
+            System.exit(1);
+        }
+
 
         addElements();
     }
@@ -95,10 +110,9 @@ public class NewTask extends JPanel {
                                 System.out.println("now I am in here :)");
                                 // if yes send the CW and do the notification stuff
 
-                                Coursework cw = new Coursework(CWName, CWAsssignee, CWDescription,
-                                        Integer.parseInt(dates[0]), Integer.parseInt(dates[1]), Integer.parseInt(dates[2]));
-
                                 // pass the cw to notification framework (it is serializable)
+                                notificationSource.sendSinksNotification(new Coursework(CWName, CWAsssignee, CWDescription,
+                                        Integer.parseInt(dates[0]), Integer.parseInt(dates[1]), Integer.parseInt(dates[2])));
 
                                 JOptionPane.showMessageDialog(null, "The coursework has been sent");
 
