@@ -11,7 +11,9 @@ public class StartSever {
         // todo add where the server admin should add the binding URL
 
 
-        // pass in the URL for the registry when you run the programme
+
+
+        // pass in the URL for the registry when you run the programme  //localhost/module_x
         JFrame SW = new ServerWindow(args[0]);
         SW.setResizable(false);
         SW.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

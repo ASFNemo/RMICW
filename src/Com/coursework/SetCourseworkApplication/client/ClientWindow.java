@@ -1,7 +1,6 @@
-package Com.coursework.SetCourseworkApplication.Com.setCourseworkApplication.client;
+package Com.coursework.SetCourseworkApplication.client;
 
 import Com.coursework.NotificationFramework.NotificationSink;
-import Com.coursework.SetCourseworkApplication.Server.NewTask;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,21 +13,22 @@ public class ClientWindow extends JFrame {
 
     JLabel title;
 
-    CWList courseworkList;
+    CWs courseworkList;
     NotificationSink notificationSink;
-    SourceManager sourceManager;
+    CWSourcesManager CWSourcesManager;
 
     public ClientWindow() throws RemoteException{
         super();
 
 
+        setup();
 
         this.setSize(new Dimension(700,500));
 
         title = new JLabel("Your coursework assignments");
 
-        TasksWindow TW = new TasksWindow();
-        CourseWorkFeeds CWF = new CourseWorkFeeds();
+        TasksWindow TW = new TasksWindow(courseworkList);
+        CourseWorkFeeds CWF = new CourseWorkFeeds(this.CWSourcesManager);
 
 
 
@@ -37,12 +37,13 @@ public class ClientWindow extends JFrame {
         this.add(CWF);
 
         title.setBounds(250, 20, 200, 50);
-        TW.setBounds(200, 100, 500, 400);
+        TW.setBounds(200, 90, 500, 400);
         CWF.setBounds(0, 200, 200, 300);
     }
 
     public void setup() throws RemoteException{
-        this.courseworkList = new CWList();
+        this.courseworkList = new CWs();
         this.notificationSink = new NotificationSink(courseworkList);
+        CWSourcesManager = new CWSourcesManager(this.notificationSink);
     }
 }

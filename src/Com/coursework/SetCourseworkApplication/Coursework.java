@@ -13,6 +13,8 @@ public class Coursework implements Notification {
     int month;
     int year;
 
+
+
     public Coursework(String name, String lecName, String description, int day, int month, int year) {
         this.name = name;
         LecName = lecName;

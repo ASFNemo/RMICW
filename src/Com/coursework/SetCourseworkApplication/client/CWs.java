@@ -1,4 +1,4 @@
-package Com.coursework.SetCourseworkApplication.Com.setCourseworkApplication.client;
+package Com.coursework.SetCourseworkApplication.client;
 
 import Com.coursework.NotificationFramework.Notification;
 import Com.coursework.NotificationFramework.NotificationListener;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by asherfischbaum on 06/12/2016.
  */
-public class CWList extends AbstractListModel implements NotificationListener{
+public class CWs extends AbstractListModel implements NotificationListener{
 
     ArrayList<Coursework> courseworks = new ArrayList();
 
@@ -44,6 +44,6 @@ public class CWList extends AbstractListModel implements NotificationListener{
     @Override
     public Object getElementAt(int index) {
         // becaus we are adding the elements to the jlist backwards.
-        return courseworks.get(courseworks.size()  - index - 1);
+        return courseworks.get(getSize()  - index - 1);
     }
 }
