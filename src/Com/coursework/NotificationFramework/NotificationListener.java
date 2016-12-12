@@ -5,5 +5,5 @@ package Com.coursework.NotificationFramework;
  */
 public interface NotificationListener {
 
-    void recieveNotification(NotificationSource notificationSource, Notification notification);
+    void recieveNotification(NSource notificationSource, Notification notification);
 }

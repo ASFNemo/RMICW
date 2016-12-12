@@ -7,5 +7,5 @@ import java.rmi.RemoteException;
  * Created by asherfischbaum on 09/12/2016.
  */
 public interface NSink extends Remote{
-    void recieveNotification(Notification notification, NotificationSource notificationSource) throws RemoteException;
+    void recieveNotification(Notification notification, NSource notificationSource) throws RemoteException;
 }

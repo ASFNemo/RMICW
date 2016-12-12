@@ -1,5 +1,6 @@
 package Com.coursework.SetCourseworkApplication.client;
 
+import Com.coursework.NotificationFramework.NSource;
 import Com.coursework.NotificationFramework.Notification;
 import Com.coursework.NotificationFramework.NotificationListener;
 import Com.coursework.NotificationFramework.NotificationSource;
@@ -17,9 +18,12 @@ public class CWs extends AbstractListModel implements NotificationListener{
     ArrayList<Coursework> courseworks = new ArrayList();
 
     @Override
-    public void recieveNotification(NotificationSource notificationSource, Notification notification) {
+    public void recieveNotification(NSource notificationSource, Notification notification) {
 
         if (!courseworks.contains(notification)){
+
+            System.out.println("the coursework is: " + ((Coursework) notification));
+
             courseworks.add((Coursework) notification);
             // apparently the best way to update the JList we havehttp://stackoverflow.com/questions/6815726/jlist-and-arraylist-update
             fireIntervalAdded(this, 0, 0);
