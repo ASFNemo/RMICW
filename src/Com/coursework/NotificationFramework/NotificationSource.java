@@ -1,7 +1,5 @@
 package Com.coursework.NotificationFramework;
 
-import com.sun.tools.corba.se.idl.constExpr.Not;
-
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -21,7 +19,7 @@ public class NotificationSource extends UnicastRemoteObject implements NSource, 
 
     public NotificationSource(String sourceURL) throws RemoteException, MalformedURLException {
         super();
-        LocateRegistry.createRegistry(1199);
+        LocateRegistry.createRegistry(1099);
         LocateRegistry.getRegistry().rebind(sourceURL, this);
         //Naming.rebind(sourceURL, this);
     }

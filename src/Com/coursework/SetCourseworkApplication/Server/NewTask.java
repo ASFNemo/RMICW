@@ -35,7 +35,7 @@ public class NewTask extends JPanel {
 
 
     public NewTask(String url){
-        super();
+        //super();
 
         try {
             notificationSource = new NotificationSource(url);

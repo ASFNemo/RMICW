@@ -1,5 +1,6 @@
 package Com.coursework.NotificationFramework;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;

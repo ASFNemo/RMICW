@@ -15,7 +15,7 @@ public class StartSever {
 
 
 
-        // pass in the URL for the registry when you run the programme  //localhost/module_x
+        // pass in the URL for the registry when you run the programme  //loc
         JFrame SW = new ServerWindow(args[0]);
         SW.setResizable(false);
         SW.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
