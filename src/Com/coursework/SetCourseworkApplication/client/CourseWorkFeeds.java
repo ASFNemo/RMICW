@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 
 /**
@@ -52,12 +53,16 @@ public class CourseWorkFeeds extends JPanel {
                 } else {
                     try {
                         CWSourcesManager.joinModuleSource(sourceToJoin);
+                        JOptionPane.showMessageDialog(null, "you have joined module: " + sourceToJoin );
                     } catch (RemoteException RE){
                         System.out.println(RE.getMessage());
                         JOptionPane.showMessageDialog(null, "Are you sure this URL exist? we are having trouble reaching it!");
                     } catch (MalformedURLException MUE){
                         System.out.println(MUE.getMessage());
                         JOptionPane.showMessageDialog(null, "The URL seems to have been formed incorrectly, please check and try again!");
+                    } catch (NotBoundException NBE){
+                        System.out.println(NBE.getMessage());
+                        JOptionPane.showMessageDialog(null, "there is no such URL in the registry");
                     }
                 }
                 // check if this is a actual source, if yes add this sink to the source and add the source to the list

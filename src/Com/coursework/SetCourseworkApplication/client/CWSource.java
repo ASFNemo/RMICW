@@ -1,5 +1,6 @@
 package Com.coursework.SetCourseworkApplication.client;
 
+import Com.coursework.NotificationFramework.NSource;
 import Com.coursework.NotificationFramework.NotificationSource;
 
 /**
@@ -8,9 +9,9 @@ import Com.coursework.NotificationFramework.NotificationSource;
 public class CWSource {
     String moduleName;
     String URL;
-    NotificationSource notificationSource;
+    NSource notificationSource;
 
-    public CWSource(String URL, NotificationSource notificationSource) {
+    public CWSource(String URL, NSource notificationSource) {
         this.URL = URL;
         this.notificationSource = notificationSource;
     }
@@ -19,7 +20,4 @@ public class CWSource {
         return URL;
     }
 
-    public NotificationSource getNotificationSource() {
-        return notificationSource;
-    }
 }

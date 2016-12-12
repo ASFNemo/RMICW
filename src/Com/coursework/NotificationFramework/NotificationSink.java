@@ -1,12 +1,13 @@
 package Com.coursework.NotificationFramework;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
  * Created by asherfischbaum on 05/12/2016.
  */
-public class NotificationSink extends UnicastRemoteObject{
+public class NotificationSink extends UnicastRemoteObject implements NSink, Serializable{
 
     // I chose 4511 because it spells Ash :p
     private static final long serialVersionUID = 4511L;

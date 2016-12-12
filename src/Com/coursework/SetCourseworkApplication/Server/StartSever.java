@@ -1,13 +1,15 @@
 package Com.coursework.SetCourseworkApplication.Server;
 
 import javax.swing.*;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 /**
  * Created by asherfischbaum on 05/12/2016.
  */
 public class StartSever {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RemoteException {
         // todo add where the server admin should add the binding URL
 
 

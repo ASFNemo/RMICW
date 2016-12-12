@@ -1,10 +1,12 @@
 package Com.coursework.SetCourseworkApplication.client;
 
-import Com.coursework.NotificationFramework.NotificationSink;
+import Com.coursework.NotificationFramework.NSink;
+import Com.coursework.NotificationFramework.NSource;
 import Com.coursework.NotificationFramework.NotificationSource;
 
 import javax.swing.*;
 import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
@@ -13,12 +15,12 @@ import java.util.ArrayList;
  */
 public class CWSourcesManager extends AbstractListModel{
 
-    NotificationSink notificationSink;
+    NSink Nsink;
 
     ArrayList<CWSource> cwSourceList = new ArrayList<>();
 
-    public CWSourcesManager(NotificationSink notificationSink) {
-        this.notificationSink = notificationSink;
+    public CWSourcesManager(NSink notificationSink) {
+        this.Nsink = notificationSink;
     }
 
 
@@ -43,18 +45,31 @@ public class CWSourcesManager extends AbstractListModel{
         return false;
     }
 
-    public void joinModuleSource (String sourceURL) throws RemoteException, MalformedURLException{
-        NotificationSource notificationSource = new NotificationSource(sourceURL);
-        notificationSource.addSink(this.notificationSink);
-        cwSourceList.add(new CWSource(sourceURL, notificationSource));
-        fireIntervalAdded(this, cwSourceList.size(), cwSourceList.size()); // I think i have this wrong and it should be -1
+    public void joinModuleSource (String sourceURL) throws RemoteException, MalformedURLException, NotBoundException{
+        //NotificationSource notificationSource = null;
+            System.out.println("in the join module method");
+            //todo maybe i have changed this inccorectly!!!
+            //notificationSource = new NotificationSource(sourceURL);
+
+            NSource ns = NotificationSource.getSource(sourceURL);
+            ns.addSink(Nsink);
+            cwSourceList.add(new CWSource(sourceURL, ns));
+            fireIntervalAdded(this, cwSourceList.size(), cwSourceList.size()); // I think i have this wrong and it should be -1
+
+
     }
 
     public void leavemoduleSource(int sourceListIndex){
 
         CWSource cwSource = cwSourceList.remove(sourceListIndex);
         fireIntervalRemoved(this, sourceListIndex, sourceListIndex);
-        cwSource.notificationSource.removeSink(this.notificationSink);
+        try {
+            cwSource.notificationSource.removeSink(this.Nsink);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+
+            //todo add a joptionpan
+        }
 
     }
 }
