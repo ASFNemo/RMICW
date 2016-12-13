@@ -49,7 +49,7 @@ public class NewTask extends JPanel {
         sourceArrayList = new DefaultComboBoxModel();
 
         try {
-            notificationSource = new NotificationSource(url);
+            notificationSource = new NotificationSource("rmi://localhost:1099/"+url);
             sourceArrayList.addElement(notificationSource);
         } catch (Exception e) {
             System.out.println("EXCEPTION: " + e.toString());
@@ -207,7 +207,7 @@ public class NewTask extends JPanel {
         this.add(create);
 
         moduleSource.setBounds(75, 95, 150, 25);
-        sourceList.setBounds(225, 95, 100, 25);
+        sourceList.setBounds(225, 95, 150, 25);
         assignmentName.setBounds(75, 125, 150, 25);
         assignmentNameInput.setBounds(225, 125, 320, 25);
         assignee.setBounds(75, 160, 150, 25);

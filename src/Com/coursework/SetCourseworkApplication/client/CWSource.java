@@ -14,10 +14,16 @@ public class CWSource {
     public CWSource(String URL, NSource notificationSource) {
         this.URL = URL;
         this.notificationSource = notificationSource;
+
+        moduleName = getURL().split("/")[getURL().split("/").length - 1];
     }
 
     public String getURL() {
         return URL;
+    }
+
+    public String toString() {
+        return "Module name: " + this.moduleName;
     }
 
 }

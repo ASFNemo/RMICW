@@ -52,17 +52,17 @@ public class CourseWorkFeeds extends JPanel {
                     JOptionPane.showMessageDialog(null, "you are already subscribed to this module source");
                 } else {
                     try {
-                        CWSourcesManager.joinModuleSource(sourceToJoin);
+                        CWSourcesManager.joinModuleSource("rmi://localhost:1099/"+sourceToJoin);
                         JOptionPane.showMessageDialog(null, "you have joined module: " + sourceToJoin );
                     } catch (RemoteException RE){
                         System.out.println(RE.getMessage());
-                        JOptionPane.showMessageDialog(null, "Are you sure this URL exist? we are having trouble reaching it!");
+                        JOptionPane.showMessageDialog(null, "Are you sure this module exist? we are having trouble reaching it!");
                     } catch (MalformedURLException MUE){
                         System.out.println(MUE.getMessage());
-                        JOptionPane.showMessageDialog(null, "The URL seems to have been formed incorrectly, please check and try again!");
+                        JOptionPane.showMessageDialog(null, "The module seems to have been inputed incorrectly, please check and try again!");
                     } catch (NotBoundException NBE){
                         System.out.println(NBE.getMessage());
-                        JOptionPane.showMessageDialog(null, "there is no such URL in the registry");
+                        JOptionPane.showMessageDialog(null, "there is no such module in the registry");
                     }
                 }
                 // check if this is a actual source, if yes add this sink to the source and add the source to the list
@@ -76,6 +76,9 @@ public class CourseWorkFeeds extends JPanel {
 
         joinedModules = new JList(CWSourcesManager);
         JScrollPane moduleList = new JScrollPane(joinedModules);
+
+
+
 
         /*
             this section is for a user to remove themselves from a module source

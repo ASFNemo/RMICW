@@ -23,11 +23,13 @@ public interface NSource extends Remote {
 //        return (NotificationSource) Naming.lookup(sourceURL);
 //    }
 
-   void addSink(NSink sinkToAdd) throws RemoteException;
+    void addSink(NSink sinkToAdd) throws RemoteException;
 
     void removeSink(NSink sinkToRemove) throws RemoteException;
 
-   void sendSinksNotification(Notification notification) throws RemoteException;
+    void sendSinksNotification(Notification notification) throws RemoteException;
+
+    //String getModuleName();
 
 
 }

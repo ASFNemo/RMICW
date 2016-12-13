@@ -47,4 +47,10 @@ public class Coursework implements Notification {
     public int getYear() {
         return year;
     }
+
+    public String toString() {
+        return "Name: " + getName() + " \t Due: " + getDay() +"/" + getMonth() + "/" + getYear();
+    }
+
+
 }

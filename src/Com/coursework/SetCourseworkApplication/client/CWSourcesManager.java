@@ -54,13 +54,14 @@ public class CWSourcesManager extends AbstractListModel{
             NSource ns = NotificationSource.getSource(sourceURL);
             ns.addSink(Nsink);
             cwSourceList.add(new CWSource(sourceURL, ns));
-            fireIntervalAdded(this, cwSourceList.size(), cwSourceList.size()); // I think i have this wrong and it should be -1
+            fireIntervalAdded(this, cwSourceList.size(), cwSourceList.size());// I think i have this wrong and it should be -1
 
 
     }
 
     public void leavemoduleSource(int sourceListIndex){
 
+        // todo check if this should go after
         CWSource cwSource = cwSourceList.remove(sourceListIndex);
         fireIntervalRemoved(this, sourceListIndex, sourceListIndex);
         try {
@@ -68,7 +69,7 @@ public class CWSourcesManager extends AbstractListModel{
         } catch (RemoteException e) {
             e.printStackTrace();
 
-            //todo add a joptionpan
+            JOptionPane.showMessageDialog(null, "There was an error while trying to leave the module.");
         }
 
     }

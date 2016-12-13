@@ -16,7 +16,7 @@ import java.util.Iterator;
 public class NotificationSource extends UnicastRemoteObject implements NSource, Serializable {
 
     static final long serialVersionUID = 4511L;
-    NSource stub;
+    final String moduleName;
 
     public NotificationSource(String sourceURL) throws RemoteException, MalformedURLException {
         super();
@@ -31,6 +31,7 @@ public class NotificationSource extends UnicastRemoteObject implements NSource, 
         LocateRegistry.getRegistry(1099);
 
         java.rmi.registry.LocateRegistry.getRegistry(1099).rebind(sourceURL, this);
+        moduleName =  sourceURL.split("/")[sourceURL.split("/").length - 1];
 
         //Naming.rebind(sourceURL, this);
     }
@@ -100,6 +101,10 @@ public class NotificationSource extends UnicastRemoteObject implements NSource, 
         }
     }
 
+    public String toString() {
 
 
+
+        return moduleName;
+    }
 }
