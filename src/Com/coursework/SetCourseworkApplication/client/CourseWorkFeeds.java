@@ -48,7 +48,7 @@ public class CourseWorkFeeds extends JPanel {
 
                 System.out.println(sourceToJoin);
 
-                if (CWSourcesManager.containsCWSource(sourceToJoin)){
+                if (CWSourcesManager.containsCWSource("rmi://localhost:1099/" + sourceToJoin)){
                     JOptionPane.showMessageDialog(null, "you are already subscribed to this module source");
                 } else {
                     try {
