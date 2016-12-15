@@ -23,12 +23,17 @@ public class CWSourcesManager extends AbstractListModel{
         this.Nsink = notificationSink;
     }
 
-
+    /*
+        returns the amount of sources subscribed ot
+     */
     @Override
     public int getSize() {
         return cwSourceList.size();
     }
 
+    /*
+        returns the source at a specific index
+     */
     @Override
     public Object getElementAt(int index) {
         return cwSourceList.get(index);
@@ -45,23 +50,20 @@ public class CWSourcesManager extends AbstractListModel{
         return false;
     }
 
+    /*
+        allows the sink to join a new source
+     */
     public void joinModuleSource (String sourceURL) throws RemoteException, MalformedURLException, NotBoundException{
-        //NotificationSource notificationSource = null;
-            System.out.println("in the join module method");
-            //todo maybe i have changed this inccorectly!!!
-            //notificationSource = new NotificationSource(sourceURL);
-
             NSource ns = NotificationSource.getSource(sourceURL);
             ns.addSink(Nsink);
             cwSourceList.add(new CWSource(sourceURL, ns));
-            fireIntervalAdded(this, cwSourceList.size(), cwSourceList.size());// I think i have this wrong and it should be -1
-
-
+            fireIntervalAdded(this, cwSourceList.size(), cwSourceList.size());
     }
 
+    /*
+        allows a user to leave a source (module). if there is an issue they are shown a popup box.
+     */
     public void leavemoduleSource(int sourceListIndex){
-
-        // todo check if this should go after
         CWSource cwSource = cwSourceList.remove(sourceListIndex);
         fireIntervalRemoved(this, sourceListIndex, sourceListIndex);
         try {

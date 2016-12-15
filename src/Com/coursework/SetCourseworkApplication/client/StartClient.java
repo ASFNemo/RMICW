@@ -7,9 +7,6 @@ import javax.swing.*;
  */
 public class StartClient {
     public static void main(String[] args) {
-        // todo add where the server admin should add the binding URL
-
-
         try {
             JFrame SC = new ClientWindow();
             SC.setResizable(false);

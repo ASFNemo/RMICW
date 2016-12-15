@@ -19,6 +19,11 @@ public class CourseWorkFeeds extends JPanel {
     JList joinedModules;
     JButton remove;
 
+    /*
+        very simply, this is where the user can sign-up for new modules (sources). they input the name of a source, if
+        they are already a member, there is no such source or the source was unreachable they are notified, otherwise
+        this sink is added ot the source
+     */
 
 
     public CourseWorkFeeds(CWSourcesManager sm){
@@ -65,8 +70,6 @@ public class CourseWorkFeeds extends JPanel {
                         JOptionPane.showMessageDialog(null, "there is no such module in the registry");
                     }
                 }
-                // check if this is a actual source, if yes add this sink to the source and add the source to the list
-                // otherwish bring up a jOprion box warning that this is an unrecognised sink
             }
         });
 

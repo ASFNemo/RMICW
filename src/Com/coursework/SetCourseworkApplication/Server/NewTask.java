@@ -42,10 +42,12 @@ public class NewTask extends JPanel {
     JComboBox sourceList;
 
 
+    /*
+        this class is for a source to create a new assignment to be sent to the sinks. in this panel we have also added
+        the ability to crete new sinks
+     */
 
     public NewTask(String url){
-        //super();
-
         sourceArrayList = new DefaultComboBoxModel();
 
         try {
@@ -63,6 +65,10 @@ public class NewTask extends JPanel {
     }
 
 
+    /*
+        this method adds everything to the pannel, the area to fill out the assignment details, send it and create new
+        modules
+     */
     public void addElements(){
         this.setSize(new Dimension(600, 400));
 
@@ -89,10 +95,13 @@ public class NewTask extends JPanel {
         dueDate = new JLabel("date due: ");
         dateInput = new JTextField();
 
-        // when clicking submit - check that what they have entered is a correct date
-        // use
-        // JOptionPane.showMessageDialog(null, "Please Enter Valid");
 
+        /*
+            when the user clicks send here, we first check that all the required fields are filled out.
+            then we check if the date is formatted as required. if everything is ok, then we send the notification to
+            all the subscirbers of this source. otherwise we bring up a pop-up that explains the problem and why the
+            assignment hasn't been sent.
+         */
         sendAssignment = new JButton("send");
         sendAssignment.addActionListener(new ActionListener() {
             @Override
@@ -151,16 +160,14 @@ public class NewTask extends JPanel {
                 } else {
                     JOptionPane.showMessageDialog(null, "Please fill out all fields");
                 }
-
-                // check if the date is filled in correctly
-                // check if everything is filled in correctly.
-
-                // if not
-                // show pop-up box:
-                // and then let them fill in
             }
         });
 
+
+        /*
+            here we allow for the creation of additional sinks. we expect input of a module name. if there is a problem
+            a popup box is shown, otherwise a new source is created.
+         */
         module_url = new JLabel("enter new Module URL:");
         URL_input = new JTextField();
         create = new JButton("create");
@@ -188,6 +195,8 @@ public class NewTask extends JPanel {
 
             }
         });
+
+
 
 
 

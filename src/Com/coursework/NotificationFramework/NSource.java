@@ -15,21 +15,20 @@ import java.util.Iterator;
 public interface NSource extends Remote {
 
 
-//    static NotificationSource getSource(String sourceURL) throws RemoteException, MalformedURLException, NotBoundException {
-////        NotificationSource notificationSource = (NotificationSource) Naming.lookup(sourceURL);
-////        System.out.println(notificationSource);
-//        //return notificationSource;
-//
-//        return (NotificationSource) Naming.lookup(sourceURL);
-//    }
 
+    /*
+        will allow sinks to be added to the source
+     */
     void addSink(NSink sinkToAdd) throws RemoteException;
 
+    /*
+        will allow sinks to be removed from the source
+     */
     void removeSink(NSink sinkToRemove) throws RemoteException;
 
+    /*
+        will send notificatiosn to the siks subscribed to the source
+     */
     void sendSinksNotification(Notification notification) throws RemoteException;
-
-    //String getModuleName();
-
 
 }

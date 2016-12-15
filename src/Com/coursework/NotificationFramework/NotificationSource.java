@@ -17,10 +17,10 @@ public class NotificationSource extends UnicastRemoteObject implements NSource, 
 
     static final long serialVersionUID = 4511L;
     final String moduleName;
+    HashSet sinksSet = new HashSet();
 
     public NotificationSource(String sourceURL) throws RemoteException, MalformedURLException {
         super();
-        //stub = (NSource) UnicastRemoteObject.exportObject(this, 0);
 
         try{
             LocateRegistry.createRegistry(1099);
@@ -32,41 +32,35 @@ public class NotificationSource extends UnicastRemoteObject implements NSource, 
 
         java.rmi.registry.LocateRegistry.getRegistry(1099).rebind(sourceURL, this);
         moduleName =  sourceURL.split("/")[sourceURL.split("/").length - 1];
-
-        //Naming.rebind(sourceURL, this);
     }
 
-    // TODO: WORK OUT IF THIS NEEDS TO BE SYNCHRONISED.
     // checks for a notification source with the given URL and returns the source
     // must be static as lookup can happen if a source is already in existence and thus, we do not need to instantiate a new one but still need to use the method
     synchronized public static NSource getSource(String sourceURL) throws RemoteException, MalformedURLException, NotBoundException{
-//        NotificationSource notificationSource = (NotificationSource) Naming.lookup(sourceURL);
-//        System.out.println(notificationSource);
-        //return notificationSource;
-
-        //return (NSource) Naming.lookup(sourceURL);
         return (NSource) java.rmi.registry.LocateRegistry.getRegistry(1099).lookup(sourceURL);
     }
 
+    /*
+        adds a sink that is subscibing to the list of siks already subscirbed
+     */
     @Override
     public void addSink(NSink sinkToAdd) {
         sinksSet.add(sinkToAdd);
-
         Iterator<NSink> iterator = sinksSet.iterator();
-
         while (iterator.hasNext()){
             try {
                 System.out.println(iterator.next().toString());
             } catch (Exception e){
                 System.out.println(e.toString());
-                // consider catching the specific exception --- the remote exception
-                // consider tryig to resend a few times and if it does not work then removing the sink from the list.
             }
 
 
         }
     }
 
+    /*
+        removes the sink from the list of subscribed sinks
+     */
     @Override
     public void removeSink(NSink sinkToRemove) {
         if (sinksSet.contains(sinkToRemove)){
@@ -75,36 +69,39 @@ public class NotificationSource extends UnicastRemoteObject implements NSource, 
     }
 
 
-    HashSet sinksSet = new HashSet();
 
-
+    /*
+         we want to send every notification to every sink that has subscribed to this sink therefore we iterate over
+         the hash set of sinks. If a sink is offline we try again and if that does not work we remove them from the list
+         of subscribed sinks
+     */
     synchronized public void sendSinksNotification(Notification notification){
-        // we want to send every notification to every sink that has subscribed to this sink
-        // therfore we want to itereate through the whole hashset
-
-        System.out.println("boooooo");
-
         Iterator<NSink> iterator = sinksSet.iterator();
 
         while (iterator.hasNext()){
+            NSink current = iterator.next();
             try {
-                System.out.println("in here");
-                iterator.next().recieveNotification(notification, this);
+                current.recieveNotification(notification, this);
             } catch (Exception e){
-                System.out.println(e.toString());
-                e.printStackTrace();
-                // consider catching the specific exception --- the remote exception
-                // consider tryig to resend a few times and if it does not work then removing the sink from the list.
+                //System.out.println(e.toString());
+
+                try {
+                    current.recieveNotification(notification, this);
+                } catch (Exception et){
+                    //System.out.println(et.getMessage());
+                    System.out.println("the sink is unreachable for a second time so will be removed from sinks to message");
+                    sinksSet.remove(current);
+                }
             }
 
 
         }
     }
 
+    /*
+        sets the name of the module for use by the server and client
+     */
     public String toString() {
-
-
-
         return moduleName;
     }
 }

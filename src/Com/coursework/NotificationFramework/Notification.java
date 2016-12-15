@@ -8,8 +8,6 @@ import java.rmi.Remote;
  */
 public interface Notification extends Serializable{
 
-    // class Notification <T extends Serialisable> implements Serializable{
-
 
     /*
         this is just used as a stub to show that the notification that will be sent/recieved is serializable.

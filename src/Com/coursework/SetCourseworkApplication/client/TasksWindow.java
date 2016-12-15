@@ -23,6 +23,10 @@ public class TasksWindow extends JPanel {
         addElements();
     }
 
+    /*
+        this is the panel where all the task are shown. this uses the abstractLsitModel of CWs. when a user clicks on
+        a notification and then "more info" they are shown a popup box with the details of the coursework.
+     */
     public void addElements(){
         this.setSize(500, 400);
         this.setLayout(null);
@@ -45,9 +49,6 @@ public class TasksWindow extends JPanel {
                                                         "\n Due Date: " + cw.getDay() + "/" + cw.getMonth() + "/" + cw.getYear() +
                                                         "\n Description: " + cw.getDescription());
 
-//                    JOptionPane.showMessageDialog(null, "you have been removed from module: " +
-//                            CWSourcesManager.getElementAt(courseWList.getSelectedIndex()));
-//                    CWSourcesManager.leavemoduleSource(courseWList.getSelectedIndex());
                 }
             }
         });

@@ -13,7 +13,10 @@ public class Coursework implements Notification {
     int month;
     int year;
 
-
+    /*
+        jsut a class representation of the coursework. since this is the notification for our application, it implements
+        the notificaiton interface forom the framework.
+     */
 
     public Coursework(String name, String lecName, String description, int day, int month, int year) {
         this.name = name;

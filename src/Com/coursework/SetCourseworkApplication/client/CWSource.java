@@ -11,6 +11,10 @@ public class CWSource {
     String URL;
     NSource notificationSource;
 
+    /*
+        a courseworks source and it's name
+     */
+
     public CWSource(String URL, NSource notificationSource) {
         this.URL = URL;
         this.notificationSource = notificationSource;

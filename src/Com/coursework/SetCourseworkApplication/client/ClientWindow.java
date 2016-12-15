@@ -11,6 +11,12 @@ import java.rmi.RemoteException;
  */
 public class ClientWindow extends JFrame {
 
+    /*
+        creates a panel where the user can sign up to/leave sources as well as creates a pain for the notifications. it
+        also sets up a object of coursework list which implements abstractListModel to e used by the tasks window. It
+        also sets itself up as the notificationSink and the Courseworks manager
+     */
+
     JLabel title;
 
     CWs courseworkList;
